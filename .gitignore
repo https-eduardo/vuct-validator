@@ -1,0 +1,6 @@
+node_modules
+
+# folders that remain at root folder after publish
+/vue
+/validators
+/react
