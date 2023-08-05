@@ -51,11 +51,8 @@ function Login() {
   };
 
   const emailState = useValidatedState(
-    "",
-    {
-      name: "email",
-      rules: rules.email,
-    },
+    { name: "email", value: "" },
+    rules.email,
     errorHandler
   );
 }
