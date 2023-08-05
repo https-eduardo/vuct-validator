@@ -10,10 +10,11 @@ import {
 /**
  * Returns an state that listen to every change on value an validate based on its declared rules.
  *
- * @param {T} initialValue The initial value of this state.
- * @param {ReactValidationSettings} validationSettings Settings that will be used to validate the value.
+ * @param {ReactValidationData<T>} data The initial value of this state.
+ * @param {ValidationRule} rule Settings that will be used to validate the value.
  * @param {ValidationCallback} callback An function that will be called when the value change.
- * @return {value: T, setter: (value: T) => void} an array containing the value and the setter function, equal to useState.
+ * @param {ValidationOptions} [options] An function that will be called when the value change.
+ * @return an array containing the value and the setter function, equal to useState.
  */
 export function useValidatedState<T = never>(
   data: ReactValidationData<T>,
