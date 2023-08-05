@@ -30,7 +30,7 @@ export function useValidatedState<T = never>(
         { [name]: value },
         handler({ [name]: rule }, callback, options)
       ),
-    [value]
+    []
   );
 
   const setterFunction = (value: T) => {
