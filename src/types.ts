@@ -4,10 +4,9 @@ export interface ValidationOptions {
   forbidNonRegistered: boolean;
 }
 
-export interface ReactValidationSettings {
+export interface ReactValidationData<T> {
   name: string;
-  options?: ValidationOptions;
-  rule: ValidationRule;
+  value: T;
 }
 
 export interface VueValidationSettings {
