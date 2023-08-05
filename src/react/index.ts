@@ -1,6 +1,11 @@
 import { useMemo, useState } from "react";
 import { handler } from "../handler";
-import { ReactValidationSettings, ValidationCallback } from "../types";
+import {
+  ReactValidationData,
+  ValidationCallback,
+  ValidationOptions,
+  ValidationRule,
+} from "../types";
 
 /**
  * Returns an state that listen to every change on value an validate based on its declared rules.
@@ -11,11 +16,14 @@ import { ReactValidationSettings, ValidationCallback } from "../types";
  * @return {value: T, setter: (value: T) => void} an array containing the value and the setter function, equal to useState.
  */
 export function useValidatedState<T = never>(
-  initialValue: T,
-  { name, rule, options }: ReactValidationSettings,
-  callback: ValidationCallback
+  data: ReactValidationData<T>,
+  rule: ValidationRule,
+  callback: ValidationCallback,
+  options?: ValidationOptions
 ): [value: T, setter: (value: T) => void] {
-  const [value, setValue] = useState<T>(initialValue);
+  const name = data.name;
+  const [value, setValue] = useState<T>(data.value);
+
   const valueProxy = useMemo(
     () =>
       new Proxy(
