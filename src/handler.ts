@@ -6,6 +6,14 @@ import {
   ValidationRules,
 } from "./types";
 
+function isNotRequiredValueInitialized(value: unknown) {
+  let initialValue = value;
+  if (value && typeof value === "object")
+    initialValue = Object.keys(value).length;
+
+  return !!initialValue;
+}
+
 export const handler = (
   rules: ValidationRules,
   callback: ValidationCallback,
@@ -23,6 +31,11 @@ export const handler = (
     if (!propRules) {
       if (options && options.forbidNonRegistered)
         error = { [propName]: getUnregistedPropMessage(propName) };
+      callback(error);
+      return true;
+    }
+
+    if (!propRules.required && !isNotRequiredValueInitialized(value)) {
       callback(error);
       return true;
     }
